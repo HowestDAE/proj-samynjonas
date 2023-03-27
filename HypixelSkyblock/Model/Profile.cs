@@ -21,6 +21,9 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "members")]
         public Dictionary<string, Member> Members { get; set; }
 
+        [JsonProperty(PropertyName = "community_upgrades")]
+        public CommunityUpgrades communityUpgrades { get; set; }
+
         [JsonProperty(PropertyName = "last_save")]
         public long lastSave { get; set; }
 
@@ -256,9 +259,48 @@ namespace HypixelSkyblock.Model
 
     public class Dungeon
     {
+        public struct DailyRun
+        {
+            [JsonProperty(PropertyName = "current_day_stamp")]
+            public long currentDayStamp { get; set; }
+
+            [JsonProperty(PropertyName = "completed_runs_count")]
+            public int completedRunsCount { get; set; }
+        }
+
+        public struct treasure
+        {
+            public struct Participant
+            {
+                [JsonProperty(PropertyName = "player_uuid")]
+                public string playerUuid { get; set; }
+
+                [JsonProperty(PropertyName = "display_name")]
+                public string displayName { get; set; }
+
+                [JsonProperty(PropertyName = "class_milestone")]
+                public int classMilestone { get; set; }
+            }
+
+
+            [JsonProperty(PropertyName = "run_id")]
+            public string runId { get; set; }
+
+            [JsonProperty(PropertyName = "completion_ts")]
+            public long completionTs { get; set; }
+
+            [JsonProperty(PropertyName = "dungeon_type")]
+            public string dungeonType { get; set; }
+
+            [JsonProperty(PropertyName = "dungeon_tier")]
+            public int dungeonTier { get; set; }
+
+            [JsonProperty(PropertyName = "participants")]
+            public List<Participant> participants { get; set; }
+        }
+
         [JsonProperty(PropertyName = "dungeon_types")]
         public DungeonTypes dungeonTypes { get; set; }
-
 
         [JsonProperty(PropertyName = "player_classes")]
         public PlayerClasses playerClasses { get; set; }
@@ -268,10 +310,14 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "dungeons_blah_blah")]
         public List<string> dungeonsBlahBlah { get; set; }
 
+        [JsonProperty(PropertyName = "selected_dungeon_class")]
         public string Selected_Dungeon_Class { get; set; }
 
-        //TODO add daily_runs
-        //TODO Add treasures
+        [JsonProperty(PropertyName = "daily_runs")]
+        public DailyRun dailyRuns { get; set; }
+
+        [JsonProperty(PropertyName = "treasures")]
+        public Dictionary<string, List<treasure>> treasures { get; set; }
     }
 
     public class DungeonTypes
@@ -849,6 +895,39 @@ namespace HypixelSkyblock.Model
 
         [JsonProperty(PropertyName = "highest_magical_power")]
         public int highestMagicalPower { get; set; }
+
+    }
+
+    public class CommunityUpgrades
+    {
+        public struct states
+        {
+            [JsonProperty(PropertyName = "upgrade")]
+            public string upgrade { get; set; }
+
+            [JsonProperty(PropertyName = "tier")]
+            public int tier { get; set; }
+
+            [JsonProperty(PropertyName = "started_ms")]
+            public long startedMs { get; set; }
+
+            [JsonProperty(PropertyName = "started_by")]
+            public string startedBy { get; set; }
+
+            [JsonProperty(PropertyName = "claimed_ms")]
+            public long claimedMs { get; set; }
+
+            [JsonProperty(PropertyName = "claimed_by")]
+            public string claimedBy { get; set; }
+
+            [JsonProperty(PropertyName = "fasttracked")]
+            public bool fasttracked { get; set; }
+        }
+
+        //TODO Currently_upgrading -- no info about type
+
+        [JsonProperty(PropertyName = "upgrade_states")]
+        public List<states> upgrade { get; set; }
 
     }
 
