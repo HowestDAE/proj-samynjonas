@@ -1,0 +1,34 @@
+﻿<Page x:Class="HypixelSkyblock.View.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HypixelSkyblock.View"
+      xmlns:vm ="clr-namespace:HypixelSkyblock.ViewModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProfilePage">
+
+    <Page.DataContext>
+        <vm:ProfilePageVM/>
+    </Page.DataContext>    
+    
+    <Grid>
+        <Image Source="..\resources\images\netherbrick_background.jfif" Stretch="UniformToFill" Grid.Row="1" Grid.RowSpan="4"/>
+        <Rectangle Height="275" VerticalAlignment="Bottom" Stretch="UniformToFill" Grid.Row="2" Fill="#FF5C3A21"/>
+
+        <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" KeyDown="TextBox_KeyDown"/>
+
+        <Rectangle MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="2" Fill="#FF362111"/>
+
+        <!-- name of current player -->
+        <TextBlock Text="[insert_name]" FontSize="35" VerticalAlignment="Top" Margin="135, 165"/>
+
+        <!-- Profile picture of current player -->
+        <Image Grid.Row="2" Grid.RowSpan="2" Margin="50,135,0,10" VerticalAlignment="top" HorizontalAlignment="Left" Source="..\resources\images/Profile_Picture.jpg" MaxWidth="75"/>
+
+        <!-- online status of current player -->
+        <Rectangle Height="15" Width="15" VerticalAlignment="Top" Grid.Row="2" Fill="Green" HorizontalAlignment="Left" Margin="115, 200" />
+    </Grid>
+
+</Page>
