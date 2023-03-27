@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static HypixelSkyblock.Model.MiningCore;
 
 namespace HypixelSkyblock.Model
 {
@@ -15,16 +16,22 @@ namespace HypixelSkyblock.Model
         //[JsonProperty(PropertyName = "id")]
 
         [JsonProperty(PropertyName = "profile_id")]
-        public string id {  get; set; }        
+        public string id {  get; set; }
+
+        [JsonProperty(PropertyName = "members")]
+        public Dictionary<string, Member> Members { get; set; }
+
+        [JsonProperty(PropertyName = "last_save")]
+        public long lastSave { get; set; }
 
         [JsonProperty(PropertyName = "cute_name")]
         public string name { get; set; }
 
         [JsonProperty(PropertyName = "selected")]
-        public bool is_selected { get; set; }
+        public bool isSelected { get; set; }
 
-        [JsonProperty(PropertyName = "members")]
-        public Dictionary<string, Member> Members { get; set; }
+        [JsonProperty(PropertyName = "game_mode")]
+        public string gameMode { get; set; }
     }
 
     public class Member
@@ -49,7 +56,8 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "nether_island_player_data")]
         public NetherIslandPlayerData netherIslandPlayerData { get; set; }
 
-        //TODO jacob2
+        [JsonProperty(PropertyName = "jacob2")]
+        public Jacob jacob { get; set; }
 
         [JsonProperty(PropertyName = "stats")]
         public Dictionary<string, float> stats { get; set; }
@@ -70,7 +78,7 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "fairy_souls_collected")]
         public int fairySoulsCollected { get; set; }
 
-        //[JsonProperty(PropertyName = "bestiary")]                 //TODO fix, there is 1 bool )°:
+        //[JsonProperty(PropertyName = "bestiary")]                         //TODO fix, there is 1 bool ):
         //public Dictionary<string, int> bestiary { get; set; }
 
         [JsonProperty(PropertyName = "tutorial")]
@@ -82,7 +90,7 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "visited_zones")]
         public List<string> visitedZones { get; set; }
 
-        //TODO coop_invitation
+        //TODO coop_invitation -- not enough info yet
 
         [JsonProperty(PropertyName = "soulflow")]
         public int soulflow { get; set; }
@@ -96,11 +104,14 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "autopet")]
         public autoPet autopet { get; set; }
 
-        //TODO inv_armor
+        [JsonProperty(PropertyName = "inv_armor")]
+        public storageContent invArmor { get; set; }
 
-        //TODO accessory_bag_storage
+        [JsonProperty(PropertyName = "accessory_bag_storage")]
+        public AccessoryBagStorage accessoryBagStorage { get; set; }
 
-        //TODO leveling
+        [JsonProperty(PropertyName = "leveling")]
+        public Leveling leveling { get; set; }
 
         [JsonProperty(PropertyName = "crafted_generators")]
         public List<string> craftedGenerators { get; set; }
@@ -108,15 +119,17 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "visited_modes")]
         public List<string> visitedModes { get; set; }
 
-        //TODO Disabled_potion_effects
+        //TODO Disabled_potion_effects -- no info yet
 
-        //TODO trapper_quest
+        [JsonProperty(PropertyName = "trapper_quest")]
+        public Dictionary<string, long> trapperQuest { get; set; }
 
-        //TODO mining_code
+        [JsonProperty(PropertyName = "mining_core")]
+        public MiningCore miningCore { get; set; }
 
-        //TODO trophy_fish
+        //TODO trophy_fish -- first is list other int
 
-        //TODO forge
+        //TODO forge -- dont know how this works yet
 
         [JsonProperty(PropertyName = "fairy_souls")]
         public int fairySouls { get; set; }
@@ -129,6 +142,9 @@ namespace HypixelSkyblock.Model
 
         [JsonProperty(PropertyName = "first_join")]
         public long firstJoin { get; set; }
+
+        [JsonProperty(PropertyName = "favorite_arrow")]
+        public string favoriteArrow { get; set; }
 
         //TODO paused_effects
 
@@ -165,7 +181,11 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "talisman_bag")]
         public storageContent talismanBag { get; set; }
 
-        //TODO backpack_icons
+        [JsonProperty(PropertyName = "essence_crimson")]
+        public int essenceCrimson { get; set; }
+
+        [JsonProperty(PropertyName = "backpack_icons")]
+        public Dictionary<string, storageContent> backpackIcons { get; set; }
 
         [JsonProperty(PropertyName = "experience_skill_combat")]
         public float experienceSkillCombat { get; set; }
@@ -515,14 +535,14 @@ namespace HypixelSkyblock.Model
             public int dojoTimeFireball { get; set; }
         }
 
-        //kuudra_completed_tiers
+        //TODO kuudra_completed_tiers
 
         [JsonProperty(PropertyName = "dojo")]
         public Dojo dojo { get; set; }
 
-        //abiphone
+        //TODO abiphone
 
-        //matriarch
+        //TODO matriarch
 
         [JsonProperty(PropertyName = "mages_reputation")]
         public float magesReputation { get; set; }
@@ -536,7 +556,7 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "last_minibosses_killed")]
         public List<string> lastMinibossesKilled { get; set; }
 
-        //kuudra_party_finder
+        //TODO kuudra_party_finder
     }
 
     public class Quest
@@ -574,9 +594,14 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "tier")]
         public string tier { get; set; }
 
-        //HeldItem
-        //candyUsed
-        //skin
+        [JsonProperty(PropertyName = "heldItem")]
+        public string heldItem { get; set; }
+
+        [JsonProperty(PropertyName = "candyUsed")]
+        public int candyUsed { get; set; }
+
+        [JsonProperty(PropertyName = "skin")]
+        public string skin { get; set; }
     }
 
     public class autoPet
@@ -634,4 +659,197 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "completed_at")]
         public long completedAt { get; set; }
     }
+
+    public class Jacob
+    {
+        public struct contest
+        {
+            [JsonProperty(PropertyName = "collected")]
+            public int collected { get; set; }
+
+            [JsonProperty(PropertyName = "claimed_rewards")]
+            public bool claimedRewards { get; set; }
+
+            [JsonProperty(PropertyName = "claimed_position")]
+            public int claimedPosition { get; set; }
+
+            [JsonProperty(PropertyName = "claimed_participants")]
+            public int claimedParticipants { get; set; }
+        }
+
+        [JsonProperty(PropertyName = "medals_inv")]
+        public Dictionary<string, int> medalsInv { get; set; }
+
+        //TODO perks
+
+        [JsonProperty(PropertyName = "contests")]
+        public Dictionary<string, contest> contests { get; set; }
+
+        [JsonProperty(PropertyName = "talked")]
+        public bool talked { get; set; }
+    }
+
+    public class Leveling
+    {
+        [JsonProperty(PropertyName = "experience")]
+        public int experience { get; set; }
+    }
+
+    public class MiningCore
+    {
+        public struct Node
+        {
+            [JsonProperty(PropertyName = "special_0")]
+            public int special0 { get; set; }
+
+            [JsonProperty(PropertyName = "mining_speed")]
+            public int miningSpeed { get; set; }
+
+            [JsonProperty(PropertyName = "mining_fortune")]
+            public int miningFortune { get; set; }
+
+            [JsonProperty(PropertyName = "titanium_insanium")]
+            public int titaniumInsanium { get; set; }
+
+            [JsonProperty(PropertyName = "mining_speed_boost")]
+            public int miningSpeedBoost { get; set; }
+
+            [JsonProperty(PropertyName = "random_event")]
+            public int randomEvent { get; set; }
+
+            [JsonProperty(PropertyName = "mining_madness")]
+            public int miningMadness { get; set; }
+
+            [JsonProperty(PropertyName = "goblin_killer")]
+            public int goblinKiller { get; set; }
+
+            [JsonProperty(PropertyName = "lonesome_miner")]
+            public int lonesomeMiner { get; set; }
+        }
+
+        public struct Crystal
+        {
+            [JsonProperty(PropertyName = "state")]
+            public string state { get; set; }
+
+            [JsonProperty(PropertyName = "total_found")]
+            public int totalFound { get; set; }
+
+            [JsonProperty(PropertyName = "total_placed")]
+            public int totalPlaced { get; set; }
+        }
+
+        [JsonProperty(PropertyName = "nodes")]
+        public Node nodes { get; set; }
+
+        [JsonProperty(PropertyName = "received_free_tier")]
+        public bool receivedFreeTier { get; set; }
+
+        [JsonProperty(PropertyName = "tokens")]
+        public int tokens { get; set; }
+
+        [JsonProperty(PropertyName = "powder_mithril")]
+        public int powderMithril { get; set; }
+
+        [JsonProperty(PropertyName = "powder_mithril_total")]
+        public int powderMithrilTotal { get; set; }
+
+        [JsonProperty(PropertyName = "tokens_spent")]
+        public int tokensSpent { get; set; }
+
+        [JsonProperty(PropertyName = "powder_spent_mithril")]
+        public int powderSpentMithril { get; set; }
+
+        [JsonProperty(PropertyName = "experience")]
+        public float experience { get; set; }
+
+        [JsonProperty(PropertyName = "retroactive_tier2_token")]
+        public bool retroactiveTier2Token { get; set; }
+
+        [JsonProperty(PropertyName = "crystals")]
+        public Dictionary<string, Crystal> crystals { get; set; }
+
+        [JsonProperty(PropertyName = "greater_mines_last_access")]
+        public long greaterMinesLastAccess { get; set; }
+
+        //TODO biomes
+
+        [JsonProperty(PropertyName = "powder_gemstone")]
+        public int powderGemstone { get; set; }
+
+        [JsonProperty(PropertyName = "powder_gemstone_total")]
+        public int powderGemstoneTotal { get; set; }
+
+        [JsonProperty(PropertyName = "selected_pickaxe_ability")]
+        public string selectedPickaxeAbility { get; set; }
+
+        [JsonProperty(PropertyName = "daily_ores_mined_day_mithril_ore")]
+        public int dailyOresMinedDayMithrilOre { get; set; }
+
+        [JsonProperty(PropertyName = "daily_ores_mined_mithril_ore")]
+        public int dailyOresMinedMithrilOre { get; set; }
+
+        [JsonProperty(PropertyName = "daily_ores_mined_day_gemstone")]
+        public int dailyOresMinedDayGemstone { get; set; }
+
+        [JsonProperty(PropertyName = "daily_ores_mined_gemstone")]
+        public int dailyOresMinedGemstone { get; set; }
+
+        [JsonProperty(PropertyName = "last_reset")]
+        public long lastReset { get; set; }
+
+        [JsonProperty(PropertyName = "daily_ores_mined_day")]
+        public int dailyOresMinedDay { get; set; }
+
+        [JsonProperty(PropertyName = "daily_ores_mined")]
+        public int dailyOresMined { get; set; }
+
+    }
+
+    public class AccessoryBagStorage
+    {
+        public struct slot
+        {
+            [JsonProperty(PropertyName = "health")]
+            public int health { get; set; }
+
+            [JsonProperty(PropertyName = "defense")]
+            public int defense { get; set; }
+
+            [JsonProperty(PropertyName = "walk_speed")]
+            public int walkSpeed { get; set; }
+
+            [JsonProperty(PropertyName = "strength")]
+            public int strength { get; set; }
+
+            [JsonProperty(PropertyName = "critical_damage")]
+            public int criticalDamage { get; set; }
+
+            [JsonProperty(PropertyName = "critical_chance")]
+            public int criticalChance { get; set; }
+
+            [JsonProperty(PropertyName = "attack_speed")]
+            public int attackSpeed { get; set; }
+
+            [JsonProperty(PropertyName = "intelligence")]
+            public int intelligence { get; set; }
+        }
+
+        [JsonProperty(PropertyName = "tuning")]
+        public slot tuning { get; set; }
+
+        [JsonProperty(PropertyName = "selected_power")]
+        public string selectedPower { get; set; }
+
+        [JsonProperty(PropertyName = "bag_upgrades_purchased")]
+        public int bagUpgradesPurchased { get; set; }
+
+        [JsonProperty(PropertyName = "unlocked_powers")]
+        public List<string> unlockedPowers { get; set; }
+
+        [JsonProperty(PropertyName = "highest_magical_power")]
+        public int highestMagicalPower { get; set; }
+
+    }
+
 }

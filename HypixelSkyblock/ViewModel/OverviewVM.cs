@@ -21,7 +21,7 @@ namespace HypixelSkyblock.ViewModel
 
             Console.WriteLine(lstProfiles.Count);
             Console.WriteLine(lstProfiles[0].Members.Count);
-            Console.WriteLine(lstProfiles[0].Members[lstProfiles[0].Members.ElementAt(0).Key].slayerBosses.ElementAt(0).Key);
+            Console.WriteLine(lstProfiles[0].Members["cb12d6095d2b4439a92bef959983c2a1"].slayerBosses["enderman"].bossKillsTier0);
 
 
         }
