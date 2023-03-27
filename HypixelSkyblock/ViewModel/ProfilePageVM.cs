@@ -10,26 +10,26 @@ namespace HypixelSkyblock.ViewModel
 {
     internal class ProfilePageVM : ObservableObject
     {
-        private User currentProfile = new User()
-        {
-            userName = string.Empty,
-            UUID = string.Empty,
-            texture = string.Empty
-        };
-
-
-        public User CurrentProfile
-        {
-            get
-            { 
-                return CurrentProfile; 
-            }
-            set 
-            { 
-                currentProfile = value;
-                OnPropertyChanged(nameof(CurrentProfile));
-            }
-        }
+        //private User currentProfile = new User()
+        //{
+        //    userName = string.Empty,
+        //    UUID = string.Empty,
+        //    texture = string.Empty
+        //};
+        //
+        //
+        //public User CurrentProfile
+        //{
+        //    get
+        //    { 
+        //        return CurrentProfile; 
+        //    }
+        //    set 
+        //    { 
+        //        currentProfile = value;
+        //        OnPropertyChanged(nameof(CurrentProfile));
+        //    }
+        //}
 
     }
 }
