@@ -7,14 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace HypixelSkyblock.ViewModel
 {
     internal class ProfilePageVM : ObservableObject
     {
         //Profile info
-        private Profile currentProfile = new Profile();
-        public Profile CurrentProfile
+        private Profiles currentProfile = new Profiles();
+        public Profiles CurrentProfile
         {
             get
             {
@@ -23,6 +24,12 @@ namespace HypixelSkyblock.ViewModel
             set
             {
                 currentProfile = value;
+
+                int index = LstProfiles.IndexOf(value);
+                if(index > -1)
+                {
+                    CurrentMember = lstMembers[index];
+                }
                 OnPropertyChanged(nameof(CurrentProfile));
             }
         }
@@ -61,9 +68,33 @@ namespace HypixelSkyblock.ViewModel
             }
         }
 
+        private List<Profiles> lstProfiles = new List<Profiles>();
+        public List<Profiles> LstProfiles
+        {
+            get
+            {
+                return lstProfiles;
+            }
+            set
+            {
+                lstProfiles = value;
+                OnPropertyChanged(nameof(lstProfiles));
+            }
+        }
 
-        public List<Profiles> lstProfiles { get; set; }
-        public List<Member> lstMembers { get; set; }
+        private List<Member> lstMembers = new List<Member>();
+        public List<Member> LstMembers
+        {
+            get
+            {
+                return lstMembers;
+            }
+            set
+            {
+                lstMembers = value;
+                OnPropertyChanged(nameof(lstMembers));
+            }
+        }
 
         public RelayCommand<string> SearchCommand
         {
@@ -73,8 +104,8 @@ namespace HypixelSkyblock.ViewModel
         public ProfilePageVM()
         {
             //lstProfiles = ProfileRepository.GetProfiles();
-            //SearchCommand = new RelayCommand<string>(LoadProfile);
-            LoadProfile("Roppos");
+            SearchCommand = new RelayCommand<string>(LoadProfile);
+            //LoadProfile("Roppos");
 
             //MemberStats = GetStats();
             //MemberStats = FilterStats("death"); //filters on deaths
@@ -97,9 +128,11 @@ namespace HypixelSkyblock.ViewModel
 
         private async void LoadProfile(string username)
         {
+            if (string.IsNullOrWhiteSpace(username)) return;
+
             MojangProfile   = await ProfileRepository.GetMojangProfile(username);
-            lstProfiles     = await ProfileRepository.GetProfilesAsync(username);
-            lstMembers      = await ProfileRepository.GetMembersAsync(username);
+            LstProfiles     = await ProfileRepository.GetProfilesAsync(username);
+            LstMembers      = await ProfileRepository.GetMembersAsync(username);
 
             const int currentIndex = 0;
             if(lstMembers.Count > 0)

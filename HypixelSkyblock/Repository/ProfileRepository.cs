@@ -128,10 +128,13 @@ namespace HypixelSkyblock.Repository
 
             await GetProfileAsync(mojangProfile.uuid);
 
-            foreach (Profiles profile in profile.profiles)
+            if(profile.profiles != null)
             {
-                lstProfiles.Add(profile);
-            }
+                foreach (Profiles profile in profile.profiles)
+                {
+                    lstProfiles.Add(profile);
+                }
+            }            
 
             return lstProfiles;
         }

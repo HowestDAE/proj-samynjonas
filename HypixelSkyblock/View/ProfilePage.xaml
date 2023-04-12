@@ -17,8 +17,12 @@
         <Image Source="..\resources\images\netherbrick_background.jfif" Stretch="UniformToFill" Grid.Row="1" Grid.RowSpan="4"/>
         <Rectangle Height="275" VerticalAlignment="Bottom" Stretch="UniformToFill" Grid.Row="2" Fill="#FF5C3A21"/>
 
+        <TextBox x:Name="usernameSearch" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" KeyDown="TextBox_KeyDown"/>
 
-        <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" KeyDown="TextBox_KeyDown"/>
+        <Button VerticalAlignment="Top" MaxWidth="50" Grid.Row="1" Content="SEARCH" Padding="4" Margin=" 4"
+            Command="{Binding SearchCommand}" 
+            CommandParameter="{Binding ElementName=usernameSearch, Path=Text}" />
+
 
         <Rectangle MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="2" Fill="#FF362111"/>
 
@@ -30,7 +34,7 @@
         <!-- online status of current player -->
         <Rectangle Height="15" Width="15" VerticalAlignment="Top" Grid.Row="2" Fill="Green" HorizontalAlignment="Left" Margin="115, 200" />
 
-        <ListBox MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="SaddleBrown" ItemsSource="{ Binding lstProfiles }" SelectedItem="{ Binding CurrentProfile }">
+        <ListBox MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="SaddleBrown" ItemsSource="{ Binding LstProfiles }" SelectedItem="{ Binding CurrentProfile }">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
