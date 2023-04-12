@@ -13,6 +13,45 @@
     </Page.DataContext>
     
     <Grid>
-        <Rectangle MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="2" Fill="#FF362111"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!-- background -->
+        <Rectangle Fill="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="4" Grid.ColumnSpan="4"/>
+        
+        <!-- menu background -->
+        <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Background="#7BC143" CornerRadius="15" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label      Grid.Row="0" Grid.Column="0" Content="Enter username" Foreground="#826644" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="20" FontWeight="Bold"/>
+                <TextBox    Grid.Row="1" Grid.Column="0" Text="" Foreground="#FFFDD0" Margin="10, 2" Background="#826644" HorizontalContentAlignment="Center" VerticalAlignment="Top" Padding="3" FontSize="15" FontWeight="Bold"/>
+
+                <!-- button to start searching the user -->
+                <Button Content="Search" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="10" Padding="5" Background="#826644" BorderBrush="#707070" BorderThickness="1">
+                                <ContentPresenter Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center" RecognizesAccessKey="True" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                
+                </Grid>
+        </Border>
     </Grid>
 </Page>
