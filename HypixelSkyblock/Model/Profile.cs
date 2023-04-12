@@ -12,11 +12,19 @@ namespace HypixelSkyblock.Model
 {
     public class Profile
     {
-        //JSON data here
-        //[JsonProperty(PropertyName = "id")]
+        //public string name{ get; set; }
 
+        [JsonProperty(PropertyName = "success")]
+        public bool success { get; set; }
+
+        [JsonProperty(PropertyName = "profiles")]
+        public List<Profiles> profiles { get; set; }
+    }
+
+    public class Profiles
+    {
         [JsonProperty(PropertyName = "profile_id")]
-        public string id {  get; set; }
+        public string id { get; set; }
 
         [JsonProperty(PropertyName = "members")]
         public Dictionary<string, Member> Members { get; set; }
@@ -267,7 +275,6 @@ namespace HypixelSkyblock.Model
             [JsonProperty(PropertyName = "completed_runs_count")]
             public int completedRunsCount { get; set; }
         }
-
         public struct treasure
         {
             public struct Participant

@@ -17,18 +17,128 @@
         <Image Source="..\resources\images\netherbrick_background.jfif" Stretch="UniformToFill" Grid.Row="1" Grid.RowSpan="4"/>
         <Rectangle Height="275" VerticalAlignment="Bottom" Stretch="UniformToFill" Grid.Row="2" Fill="#FF5C3A21"/>
 
+
         <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" KeyDown="TextBox_KeyDown"/>
 
         <Rectangle MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="2" Fill="#FF362111"/>
 
         <!-- name of current player -->
-        <TextBlock Text="[insert_name]" FontSize="35" VerticalAlignment="Top" Margin="135, 165"/>
-
+        <TextBlock Text="{ Binding MojangProfile.name }" FontSize="35" VerticalAlignment="Top" Margin="135, 165"/>
         <!-- Profile picture of current player -->
         <Image Grid.Row="2" Grid.RowSpan="2" Margin="50,135,0,10" VerticalAlignment="top" HorizontalAlignment="Left" Source="..\resources\images/Profile_Picture.jpg" MaxWidth="75"/>
 
         <!-- online status of current player -->
         <Rectangle Height="15" Width="15" VerticalAlignment="Top" Grid.Row="2" Fill="Green" HorizontalAlignment="Left" Margin="115, 200" />
-    </Grid>
 
+        <ListBox MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="SaddleBrown" ItemsSource="{ Binding lstProfiles }" SelectedItem="{ Binding CurrentProfile }">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{ Binding name }" Margin="10,0" Foreground="White" VerticalAlignment="Center" FontSize="21"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TabControl Background="RosyBrown" Width="650" Height="225" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid>
+                                    <Border x:Name="Border" BorderThickness="1" BorderBrush="Black" CornerRadius="4,4,0,0" Background="SandyBrown">
+                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="brown"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="pets" Background="SaddleBrown">                
+                <!-- Content for Tab 1 goes here -->
+                <ListBox MaxHeight="200" Width="600" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="SaddleBrown" ItemsSource="{ Binding CurrentMember.pets }">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{ Binding type }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"     FontSize="18"/>
+                                <TextBlock Text=" - " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"                  FontSize="18"/>
+                                <TextBlock Text="{ Binding tier }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"     FontSize="18"/>
+                                <TextBlock Text=" - " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"                  FontSize="18"/>
+                                <TextBlock Text="{ Binding heldItem }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18"/>
+                                <TextBlock Text=" - " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"                  FontSize="18"/>
+                                <TextBlock Text="{ Binding exp }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"      FontSize="18"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            
+            <TabItem Header="dungeons">
+                <!-- Content for Tab 2 goes here -->
+                <TextBlock Text="{ Binding CurrentMember.dungeon.Selected_Dungeon_Class }" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="21"/>
+            </TabItem>
+            
+            <TabItem Header="slayerBosses">
+                <!-- Content for Tab 3 goes here -->
+                <ListBox MaxHeight="200" Width="600" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="SaddleBrown" ItemsSource="{ Binding CurrentMember.slayerBosses }">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{ Binding Key }"   Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"    FontSize="21"/>
+                                <TextBlock Text=": "                Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="21"/>
+                                <TextBlock Text="{ Binding Value.bossKillsTier0 }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"   FontSize="21"/>
+                                <TextBlock Text=" -- "                Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="21"/>
+                                <TextBlock Text="{ Binding Value.bossKillsTier1 }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"   FontSize="21"/>
+                                <TextBlock Text=" -- "                Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="21"/>
+                                <TextBlock Text="{ Binding Value.bossKillsTier2 }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"   FontSize="21"/>
+                                <TextBlock Text=" -- "                Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="21"/>
+                                <TextBlock Text="{ Binding Value.bossKillsTier3 }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"   FontSize="21"/>
+                                <TextBlock Text=" -- "                Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="21"/>
+                                <TextBlock Text="{ Binding Value.xp }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"   FontSize="21"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            
+            <TabItem Header="stats">
+                <!-- Content for Tab 4 goes here -->
+                <ListBox MaxHeight="200" Width="600" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="SaddleBrown" ItemsSource="{ Binding CurrentMember.stats }">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{ Binding Key }"   Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"    FontSize="21"/>
+                                <TextBlock Text=": "                Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="21"/>
+                                <TextBlock Text="{ Binding Value }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"   FontSize="21"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            
+            <TabItem Header="quests">
+                <!-- Content for Tab 5 goes here -->
+                <ListBox MaxHeight="200" Width="600" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="SaddleBrown" ItemsSource="{ Binding CurrentMember.quests }">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{ Binding Key }"   Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"    FontSize="21"/>
+                                <TextBlock Text=": "                Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="21"/>
+                                <TextBlock Text="{ Binding Value.status }" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"   FontSize="21"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
 </Page>

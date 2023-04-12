@@ -13,6 +13,6 @@
     </Page.DataContext>
     
     <Grid>
-        
+        <Rectangle MinHeight="275" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="2" Fill="#FF362111"/>
     </Grid>
 </Page>

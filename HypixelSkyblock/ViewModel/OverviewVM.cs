@@ -11,20 +11,18 @@ namespace HypixelSkyblock.ViewModel
 {
     internal class OverviewVM : ObservableObject
     {
-        public List<Profile> lstProfiles { get; private set; }
+        public Profile profile { get; private set; }
 
         public Profile selectedProfile { get; set; }
 
         public OverviewVM()
         {
-            lstProfiles = ProfileRepository.GetProfiles();
+            profile = ProfileRepository.GetProfile(); //Getting the user
 
-            Console.WriteLine(lstProfiles.Count);
-            Console.WriteLine(lstProfiles[0].Members.Count);
-            Console.WriteLine(lstProfiles[0].Members["cb12d6095d2b4439a92bef959983c2a1"].slayerBosses["enderman"].bossKillsTier0);
-
-
+            Console.WriteLine(profile.profiles.Count);
+            Console.WriteLine(profile.profiles[0].Members.Count);
         }
+
 
     }
 }
