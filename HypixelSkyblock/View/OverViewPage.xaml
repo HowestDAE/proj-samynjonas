@@ -13,7 +13,6 @@
     </Page.DataContext>
     
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -26,9 +25,9 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <!-- background -->
-        <Rectangle Fill="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="4" Grid.ColumnSpan="4"/>
         
+        <!-- background -->
+        <Rectangle Fill="SkyBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="5" Grid.ColumnSpan="5"/>
         <!-- menu background -->
         <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Background="#7BC143" CornerRadius="15" Margin="10">
             <Grid>

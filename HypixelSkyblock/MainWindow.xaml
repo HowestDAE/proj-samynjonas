@@ -7,7 +7,7 @@
         xmlns:View="clr-namespace:HypixelSkyblock.View"      
         xmlns:ViewModel="clr-namespace:HypixelSkyblock.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Hypixel-Skyblock profile viewer" Height="450" Width="800">
     <Window.Content>
         <View:ProfilePage/>
     </Window.Content>
