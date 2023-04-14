@@ -45,7 +45,7 @@
         <TextBlock Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="{ Binding MojangProfile.name }" FontSize="35" />
         
         <!-- Profile picture of current player -->
-        <Image Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Source="https://crafthead.net/helm/Notch.png"/>
+        <Image Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Source="{ Binding SkinUrl }"/>
 
         <!-- Profiles -->
         <ListBox Grid.Row="2" Grid.RowSpan="5" Grid.Column="4" Margin="10" Foreground="#FFFDD0" Background="SaddleBrown" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding LstProfiles }" SelectedItem="{ Binding CurrentProfile }">
@@ -58,7 +58,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <!-- Player stats -->
         <TabControl Grid.Row="2" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="10" Background="SaddleBrown" BorderBrush="SaddleBrown" Foreground="#FFFDD0" >
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -80,8 +79,74 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="pets" Background="SaddleBrown" Foreground="#FFFDD0">                
-                <!-- Content for Tab 1 goes here -->
+            
+            <!-- Player Levels -->
+            <TabItem Header="Leveling" Background="SaddleBrown" Foreground="#FFFDD0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Level"           Grid.Row="2" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Taming"          Grid.Row="3" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Mining"          Grid.Row="4" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Foraging"        Grid.Row="5" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Enchanting"      Grid.Row="6" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Carpentry"       Grid.Row="7" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Social"          Grid.Row="2" Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Farming"         Grid.Row="3" Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Combat"          Grid.Row="4" Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Fishing"         Grid.Row="5" Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Alchemy"         Grid.Row="6" Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="Runecrafting"    Grid.Row="7" Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5, 0" FontSize="13"/>
+
+
+                    <TextBlock Text="{ Binding PlayerLevel.Player.Level }"          Grid.Row="2" Grid.Column="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Taming.Level }"          Grid.Row="3" Grid.Column="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Mining.Level }"          Grid.Row="4" Grid.Column="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Foraging.Level }"        Grid.Row="5" Grid.Column="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Enchanting.Level }"      Grid.Row="6" Grid.Column="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Carpentry.Level }"       Grid.Row="7" Grid.Column="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Social.Level }"          Grid.Row="2" Grid.Column="5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Farming.Level }"         Grid.Row="3" Grid.Column="5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Combat.Level }"          Grid.Row="4" Grid.Column="5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Fishing.Level }"         Grid.Row="5" Grid.Column="5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Alchemy.Level }"         Grid.Row="6" Grid.Column="5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+                    <TextBlock Text="{ Binding PlayerLevel.Runecrafting.Level}"     Grid.Row="7" Grid.Column="5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0" FontSize="13"/>
+
+                    <ProgressBar  Value="{ Binding PlayerLevel.Player.RemainingExp }"       Maximum="{Binding PlayerLevel.Player.NeededExp }"       Grid.Row="2" Grid.Column="1" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Taming.RemainingExp }"       Maximum="{Binding PlayerLevel.Taming.NeededExp }"       Grid.Row="3" Grid.Column="1" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Mining.RemainingExp }"       Maximum="{Binding PlayerLevel.Mining.NeededExp }"       Grid.Row="4" Grid.Column="1" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Foraging.RemainingExp }"     Maximum="{Binding PlayerLevel.Foraging.NeededExp }"     Grid.Row="5" Grid.Column="1" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Enchanting.RemainingExp }"   Maximum="{Binding PlayerLevel.Enchanting.NeededExp }"   Grid.Row="6" Grid.Column="1" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Carpentry.RemainingExp }"    Maximum="{Binding PlayerLevel.Carpentry.NeededExp }"    Grid.Row="7" Grid.Column="1" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Social.RemainingExp }"       Maximum="{Binding PlayerLevel.Social.NeededExp }"       Grid.Row="2" Grid.Column="4" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Farming.RemainingExp }"      Maximum="{Binding PlayerLevel.Farming.NeededExp }"      Grid.Row="3" Grid.Column="4" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Combat.RemainingExp }"       Maximum="{Binding PlayerLevel.Combat.NeededExp }"       Grid.Row="4" Grid.Column="4" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Fishing.RemainingExp }"      Maximum="{Binding PlayerLevel.Fishing.NeededExp }"      Grid.Row="5" Grid.Column="4" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Alchemy.RemainingExp }"      Maximum="{Binding PlayerLevel.Alchemy.NeededExp }"      Grid.Row="6" Grid.Column="4" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+                    <ProgressBar  Value="{ Binding PlayerLevel.Runecrafting.RemainingExp }" Maximum="{Binding PlayerLevel.Runecrafting.NeededExp }" Grid.Row="7" Grid.Column="4" HorizontalAlignment="stretch" VerticalAlignment="Center" Margin="4" Height="8"/>
+
+                </Grid>
+                </TabItem>
+
+            <!-- Pets -->
+            <TabItem Header="pets" Background="SaddleBrown" Foreground="#FFFDD0">
                 <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.pets }">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -98,13 +163,13 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </TabItem>
-            
-            <TabItem Header="dungeons">
+
+            <TabItem Header="dungeons" Background="SaddleBrown" Foreground="#FFFDD0">
                 <!-- Content for Tab 2 goes here -->
                 <TextBlock Text="{ Binding CurrentMember.dungeon.Selected_Dungeon_Class }" Foreground="Black" Background="SaddleBrown" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="21"/>
             </TabItem>
-            
-            <TabItem Header="slayerBosses">
+
+            <TabItem Header="slayerBosses" Background="SaddleBrown" Foreground="#FFFDD0">
                 <!-- Content for Tab 3 goes here -->
                 <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.slayerBosses }">
                     <ListBox.ItemTemplate>
@@ -126,8 +191,8 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </TabItem>
-            
-            <TabItem Header="stats">
+
+            <TabItem Header="stats" Background="SaddleBrown" Foreground="#FFFDD0">
                 <!-- Content for Tab 4 goes here -->
                 <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.stats }">
                     <ListBox.ItemTemplate>
@@ -141,8 +206,8 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </TabItem>
-            
-            <TabItem Header="quests">
+
+            <TabItem Header="quests" Background="SaddleBrown" Foreground="#FFFDD0">
                 <!-- Content for Tab 5 goes here -->
                 <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.quests }">
                     <ListBox.ItemTemplate>
