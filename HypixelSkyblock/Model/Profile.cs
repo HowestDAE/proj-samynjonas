@@ -7,18 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static HypixelSkyblock.Model.MiningCore;
+using static HypixelSkyblock.Model.Dungeon;
 
 namespace HypixelSkyblock.Model
 {
     public class Profile
     {
-        //public string name{ get; set; }
-
-        [JsonProperty(PropertyName = "success")]
-        public bool success { get; set; }
-
         [JsonProperty(PropertyName = "profiles")]
-        public List<Profiles> profiles { get; set; }
+        public Dictionary<string, Profiles> Profiles { get; set; }
     }
 
     public class Profiles
@@ -26,26 +22,20 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "profile_id")]
         public string id { get; set; }
 
-        [JsonProperty(PropertyName = "members")]
-        public Dictionary<string, Member> Members { get; set; }
-
-        [JsonProperty(PropertyName = "community_upgrades")]
-        public CommunityUpgrades communityUpgrades { get; set; }
-
-        [JsonProperty(PropertyName = "last_save")]
-        public long lastSave { get; set; }
-
         [JsonProperty(PropertyName = "cute_name")]
         public string name { get; set; }
 
-        [JsonProperty(PropertyName = "selected")]
-        public bool isSelected { get; set; }
-
         [JsonProperty(PropertyName = "game_mode")]
         public string gameMode { get; set; }
+
+        [JsonProperty(PropertyName = "current")]
+        public bool Selected { get; set; }
+
+        [JsonProperty(PropertyName = "raw")]
+        public Raw raw { get; set; }
     }
 
-    public class Member
+    public class Raw
     {
         [JsonProperty(PropertyName = "pets")]
         public List<Pet> pets { get; set; }
@@ -63,7 +53,7 @@ namespace HypixelSkyblock.Model
 
         [JsonProperty(PropertyName = "active_effects")]
         public List<Effects> activeEffects { get; set; }
-              
+
         [JsonProperty(PropertyName = "nether_island_player_data")]
         public NetherIslandPlayerData netherIslandPlayerData { get; set; }
 
@@ -632,6 +622,36 @@ namespace HypixelSkyblock.Model
 
     public class Pet
     {
+        public struct levelStruct
+        {
+            [JsonProperty(PropertyName = "level")]
+            public int level { get; set; }
+
+            //[JsonProperty(PropertyName = "xpCurrent")]
+            //public int xpCurrent { get; set; }
+
+            [JsonProperty(PropertyName = "xpForNext")]
+            public int xpForNext { get; set; }
+
+            [JsonProperty(PropertyName = "progress")]
+            public float progress { get; set; }
+
+            [JsonProperty(PropertyName = "xpMaxLevel")]
+            public int xpMaxLevel { get; set; }
+        };
+
+        public struct statsStruct
+        {
+            [JsonProperty(PropertyName = "strength")]
+            public float strength { get; set; }
+
+            [JsonProperty(PropertyName = "intelligence")]
+            public float intelligence { get; set; }
+
+            [JsonProperty(PropertyName = "speed")]
+            public float speed { get; set; }
+        };
+
         [JsonProperty(PropertyName = "uuid")]
         public string uuid { get; set; }
 
@@ -655,6 +675,31 @@ namespace HypixelSkyblock.Model
 
         [JsonProperty(PropertyName = "skin")]
         public string skin { get; set; }
+
+        [JsonProperty(PropertyName = "level")]
+        public levelStruct level { get; set; }
+
+        [JsonProperty(PropertyName = "name")]
+        public string name { get; set; }
+
+        [JsonProperty(PropertyName = "price")]
+        public float price { get; set; }
+
+        [JsonProperty(PropertyName = "soulbound")]
+        public bool soulbound { get; set; }
+
+        [JsonProperty(PropertyName = "rarity")]
+        public string rarity { get; set; }
+
+        [JsonProperty(PropertyName = "stats")]
+        public statsStruct stats { get; set; }
+
+        [JsonProperty(PropertyName = "texture_path")]
+        public string texture_path { get; set; }
+
+        [JsonProperty(PropertyName = "display_name")]
+        public string display_name { get; set; }
+
     }
 
     public class autoPet

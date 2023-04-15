@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -69,7 +70,9 @@ namespace HypixelSkyblock.Repository
             }
 
             //Actual API endpoint based on base url
-            string endpoint = "https://api.hypixel.net/skyblock/profiles?uuid=" + uuid;
+            //-- string endpoint = "https://api.hypixel.net/skyblock/profiles?uuid=" + uuid;
+            string endpoint = "https://sky.shiiyu.moe/api/v2/profile/" + uuid;
+
 
             using (HttpClient client = new HttpClient())
             {
@@ -108,9 +111,9 @@ namespace HypixelSkyblock.Repository
 
             GetProfile();
 
-            foreach(Profiles profile in profile.profiles)
+            foreach (var profile in profile.Profiles)
             {
-                lstProfiles.Add(profile);
+                lstProfiles.Add(profile.Value);
             }
 
             return lstProfiles;
@@ -124,59 +127,58 @@ namespace HypixelSkyblock.Repository
 
             await GetProfileAsync(mojangProfile.uuid);
 
-            if(profile.profiles != null)
+            if (profile.Profiles.Values != null)
             {
-                foreach (Profiles profile in profile.profiles)
+                foreach (var profile in profile.Profiles)
                 {
-                    lstProfiles.Add(profile);
+                    lstProfiles.Add(profile.Value);
                 }
-            }            
-
+            }
             return lstProfiles;
         }
-        public static async Task<List<Member>> GetMembersAsync(string username)
-        {
-            //TODO save this when converting from username to uuid
-            List<Member> lstMembers     = new List<Member>();
-            List<Profiles> lstProfiles  = await GetProfilesAsync(username);
-            
-            string UUID = mojangProfile.uuid;
-            if(!string.IsNullOrEmpty(UUID))
-            {
-                foreach (Profiles profile in lstProfiles)
-                {
-                    if (profile.Members.ContainsKey(UUID))
-                    {
-                        lstMembers.Add(profile.Members[UUID]);
-                    }
-                }
-            }            
-
-            return lstMembers;
-        }
+        //public static async Task<List<Member>> GetMembersAsync(string username)
+        //{
+        //    //TODO save this when converting from username to uuid
+        //    List<Member> lstMembers     = new List<Member>();
+        //    List<Profiles> lstProfiles  = await GetProfilesAsync(username);
+        //    
+        //    string UUID = mojangProfile.uuid;
+        //    if(!string.IsNullOrEmpty(UUID))
+        //    {
+        //        foreach (Profiles profile in lstProfiles)
+        //        {
+        //            if (profile.raw.ContainsKey(UUID))
+        //            {
+        //                lstMembers.Add(profile.r[UUID]);
+        //            }
+        //        }
+        //    }            
+        //
+        //    return lstMembers;
+        //}
         public static async Task<MojangProfile> GetMojangProfile(string username)
         {
             await GetUserAsync(username);
             return mojangProfile;
         }
 
-        public static List<Member> GetMember()
-        {
-            //TODO save this when converting from username to uuid
-            string UUID = mojangProfile.uuid;
-
-            List<Member> lstMembers = new List<Member>();
-            List<Profiles> lstProfiles = GetProfiles();
-
-            foreach(Profiles profile in lstProfiles) 
-            {
-                if(profile.Members.ContainsKey(UUID))
-                {
-                    lstMembers.Add(profile.Members[UUID]);
-                }
-            }
-
-            return lstMembers;
-        }
+        //public static List<Member> GetMember()
+        //{
+        //    //TODO save this when converting from username to uuid
+        //    string UUID = mojangProfile.uuid;
+        //
+        //    List<Member> lstMembers = new List<Member>();
+        //    List<Profiles> lstProfiles = GetProfiles();
+        //
+        //    foreach(Profiles profile in lstProfiles) 
+        //    {
+        //        if(profile.Members.ContainsKey(UUID))
+        //        {
+        //            lstMembers.Add(profile.Members[UUID]);
+        //        }
+        //    }
+        //
+        //    return lstMembers;
+        //}
     }
 }

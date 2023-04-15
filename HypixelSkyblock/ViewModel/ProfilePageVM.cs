@@ -27,30 +27,9 @@ namespace HypixelSkyblock.ViewModel
             {
                 currentProfile = value;
 
-                int index = LstProfiles.IndexOf(value);
-                if(index > -1 && index < lstProfiles.Count())
-                {
-                    CurrentMember = lstMembers[index];
-                }                
+                playerLevel = new PlayerLevels(currentProfile);
+                               
                 OnPropertyChanged(nameof(CurrentProfile));
-            }
-        }
-
-        //Member info
-        private Member currentMember = new Member();
-        public Member CurrentMember
-        {
-            get 
-            { 
-                return currentMember; 
-            }
-            set 
-            {
-                currentMember = value;
-
-                PlayerLevel = new PlayerLevels(currentMember);
-
-                OnPropertyChanged(nameof(currentMember));
             }
         }
 
@@ -105,20 +84,6 @@ namespace HypixelSkyblock.ViewModel
             }
         }
 
-        private List<Member> lstMembers = new List<Member>();
-        public List<Member> LstMembers
-        {
-            get
-            {
-                return lstMembers;
-            }
-            set
-            {
-                lstMembers = value;
-                OnPropertyChanged(nameof(lstMembers));
-            }
-        }
-
         private string skinUrl = "https://crafthead.net/helm/notch.png";
         public string SkinUrl 
         { 
@@ -162,28 +127,70 @@ namespace HypixelSkyblock.ViewModel
 
             MojangProfile   = await ProfileRepository.GetMojangProfile(username);
             LstProfiles     = await ProfileRepository.GetProfilesAsync(username);
-            LstMembers      = await ProfileRepository.GetMembersAsync(username);
+            //LstMembers      = await ProfileRepository.GetMembersAsync(username);
 
             const int currentIndex = 0;
-            if(lstMembers.Count > 0)
+            if(lstProfiles.Count > 0)
             {
-                CurrentMember = lstMembers[currentIndex];
+                CurrentProfile = lstProfiles[currentIndex];
             }
         }
 
         public struct CalculatedLevel
         {
-            public int TotalExp { get; set; }
-            public int Level { get; set; }
-            public int NeededExp { get; set; }
-            public int RemainingExp { get; set; }
-
-            public CalculatedLevel(int totalExp)
+            static float getLevel(float exp)
             {
+                return exp < 0 ? 1 : (int)Math.Floor(1 + REVERSE_PQ_PREFIX + Math.Sqrt(REVERSE_CONST + GROWTH_DIVIDES_2 * exp));
+            }
+
+            static float getExpFromLevelToNext(float level)
+            {
+                return level < 1 ? BASE : GROWTH * (level - 1) + BASE;
+            }
+
+            static float GetTotalExpToLevel(float level)
+            {
+                int lv = (int)Math.Floor((double)level);
+                float x0 = getTotalExpToFullLevel(lv);
+                if (level == lv) return x0;
+                return (getTotalExpToFullLevel(lv + 1) - x0) * (level % 1) + x0;
+            }
+
+            static float getTotalExpToFullLevel(float level)
+            {
+                return (HALF_GROWTH * (level - 2) + BASE) * (level - 1);
+            }
+
+            static float GetPercentageToNextLevel(float exp)
+            {
+                float lv = getLevel(exp);
+                float x0 = GetTotalExpToLevel((int)lv);
+                return (exp - x0) / (GetTotalExpToLevel((int)lv + 1) - x0);
+            }
+
+            public float TotalExp { get; set; }
+            public float Level { get; set; }
+            public float NeededExp { get; set; }
+            public float RemainingExp { get; set; }
+
+            private const float BASE = 10000f;
+            private const float GROWTH = 2500f;
+
+            private const float HALF_GROWTH = 0.5f * GROWTH;
+
+            private const float REVERSE_PQ_PREFIX = -(BASE - HALF_GROWTH) / GROWTH;
+            private const float REVERSE_CONST = REVERSE_PQ_PREFIX * REVERSE_PQ_PREFIX;
+            private const float GROWTH_DIVIDES_2 = 2 / GROWTH;
+
+            public CalculatedLevel(float totalExp)
+            {   
                 TotalExp = totalExp;
-                Level = (int)Math.Floor(0.5 + Math.Sqrt(2 * TotalExp + 225) / 50);
-                NeededExp = (Level * Level * 50) - (Level * 50) - 50;
-                RemainingExp = TotalExp - ((Level - 1) * (Level - 1) * 50 + 50);
+
+                Level = getLevel(totalExp);
+
+                NeededExp = getExpFromLevelToNext(totalExp);
+
+                RemainingExp = GetTotalExpToLevel(Level + 1);
             }
         }
         
@@ -202,20 +209,20 @@ namespace HypixelSkyblock.ViewModel
             public CalculatedLevel Alchemy { get; set; }
             public CalculatedLevel Runecrafting { get; set; }
 
-            public PlayerLevels(Member member)
+            public PlayerLevels(Profiles profile)
             {
-                Player       = new CalculatedLevel(member.leveling.experience);
-                Taming       = new CalculatedLevel((int)member.experienceSkillTaming);
-                Mining       = new CalculatedLevel((int)member.experienceSkillMining);
-                Foraging     = new CalculatedLevel((int)member.experienceSkillForaging);
-                Enchanting   = new CalculatedLevel((int)member.experienceSkillEnchanting);
-                Carpentry    = new CalculatedLevel((int)member.experienceSkillCarpentry);
-                Social       = new CalculatedLevel((int)member.experienceSkillSocial2);
-                Farming      = new CalculatedLevel((int)member.experienceSkillFarming);
-                Combat       = new CalculatedLevel((int)member.experienceSkillCombat);
-                Fishing      = new CalculatedLevel((int)member.experienceSkillFishing);
-                Alchemy      = new CalculatedLevel((int)member.experienceSkillAlchemy);
-                Runecrafting = new CalculatedLevel((int)member.experienceSkillRunecrafting);
+                Player       = new CalculatedLevel(profile.raw.leveling.experience);
+                Taming       = new CalculatedLevel((int)profile.raw.experienceSkillTaming);
+                Mining       = new CalculatedLevel((int)profile.raw.experienceSkillMining);
+                Foraging     = new CalculatedLevel((int)profile.raw.experienceSkillForaging);
+                Enchanting   = new CalculatedLevel((int)profile.raw.experienceSkillEnchanting);
+                Carpentry    = new CalculatedLevel((int)profile.raw.experienceSkillCarpentry);
+                Social       = new CalculatedLevel((int)profile.raw.experienceSkillSocial2);
+                Farming      = new CalculatedLevel((int)profile.raw.experienceSkillFarming);
+                Combat       = new CalculatedLevel((int)profile.raw.experienceSkillCombat);
+                Fishing      = new CalculatedLevel((int)profile.raw.experienceSkillFishing);
+                Alchemy      = new CalculatedLevel((int)profile.raw.experienceSkillAlchemy);
+                Runecrafting = new CalculatedLevel((int)profile.raw.experienceSkillRunecrafting);
             }
         }
     }

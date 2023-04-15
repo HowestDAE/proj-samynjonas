@@ -4,12 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HypixelSkyblock"
-        xmlns:View="clr-namespace:HypixelSkyblock.View"      
-        xmlns:ViewModel="clr-namespace:HypixelSkyblock.ViewModel"
+        xmlns:View="clr-namespace:HypixelSkyblock.View"
+        xmlns:vm="clr-namespace:HypixelSkyblock.ViewModel"
         mc:Ignorable="d"
         Title="Hypixel-Skyblock profile viewer" Height="450" Width="800">
-    <Window.Content>
-        <View:ProfilePage/>
-    </Window.Content>
+    <Window.DataContext>
+        <vm:MainViewModel>
+    </Window.DataContext>
 
+
+    <Grid>
+        <Frame NavigationUIVisibility="Hidden" Content="{Binding currentPage}"/>
+        <Button VerticalAlignment="Bottom"
+                Command="{Binding }"
+                Content="{Binding }" />
+    </Grid>
+    
 </Window>

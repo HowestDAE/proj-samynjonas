@@ -19,16 +19,44 @@ namespace HypixelSkyblock.ViewModel
             }
         }
 
-        OverViewPage MainPage = new OverViewPage();
-        public OverViewPage mainPage { get; set; }
+        OverViewPage mainPage = new OverViewPage();
+        public OverViewPage MainPage { get; set; }
 
 
         ProfilePage  ProfilePage = new ProfilePage();
         public ProfilePage profilePage { get; set; }
 
 
-        Page CurrentPage;
-        public Page currentPage{ get; set; }
+        Page currentPage;
+        public Page CurrentPage
+        { 
+            get
+            {
+                return currentPage;
+            }
+            set
+            {
+                currentPage = value;
+                OnPropertyChanged(nameof(currentPage));
+            }
+        }
+
+        private string switchPageButtonText = "Search Person";
+        public string SwitchPageButtonText
+        {
+            get { return switchPageButtonText; }
+            set
+            {
+                switchPageButtonText = value;
+                OnPropertyChanged(nameof(switchPageButtonText));
+            }
+        }
+
+        private void SwitchPage()
+        {
+            
+        }
+
 
         public MainViewModel() 
         {

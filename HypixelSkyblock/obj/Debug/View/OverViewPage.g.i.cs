@@ -9,6 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using HypixelSkyblock;
 using HypixelSkyblock.View;
 using HypixelSkyblock.ViewModel;
 using System;

@@ -19,8 +19,8 @@ namespace HypixelSkyblock.ViewModel
         {
             profile = ProfileRepository.GetProfile(); //Getting the user
 
-            Console.WriteLine(profile.profiles.Count);
-            Console.WriteLine(profile.profiles[0].Members.Count);
+            //Console.WriteLine(profile.profiles.Count);
+            //Console.WriteLine(profile.profiles[0].Members.Count);
         }
 
 

@@ -147,7 +147,7 @@
 
             <!-- Pets -->
             <TabItem Header="pets" Background="SaddleBrown" Foreground="#FFFDD0">
-                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.pets }">
+                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentProfile.raw.pets }">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -164,14 +164,14 @@
                 </ListBox>
             </TabItem>
 
-            <TabItem Header="dungeons" Background="SaddleBrown" Foreground="#FFFDD0">
-                <!-- Content for Tab 2 goes here -->
-                <TextBlock Text="{ Binding CurrentMember.dungeon.Selected_Dungeon_Class }" Foreground="Black" Background="SaddleBrown" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="21"/>
+            <!-- Dungeons info -->
+            <TabItem Header="dungeons" Background="SaddleBrown" Foreground="#FFFDD0">                
+                <TextBlock Text="{ Binding CurrentProfile.raw.dungeon.Selected_Dungeon_Class }" Foreground="Black" Background="SaddleBrown" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="21"/>
             </TabItem>
 
+            <!-- Slayer bosses -->
             <TabItem Header="slayerBosses" Background="SaddleBrown" Foreground="#FFFDD0">
-                <!-- Content for Tab 3 goes here -->
-                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.slayerBosses }">
+                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentProfile.raw.slayerBosses }">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -192,9 +192,9 @@
                 </ListBox>
             </TabItem>
 
-            <TabItem Header="stats" Background="SaddleBrown" Foreground="#FFFDD0">
-                <!-- Content for Tab 4 goes here -->
-                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.stats }">
+            <!-- Player stats -->
+            <TabItem Header="stats" Background="SaddleBrown" Foreground="#FFFDD0">               
+                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentProfile.raw.stats }">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -207,9 +207,9 @@
                 </ListBox>
             </TabItem>
 
-            <TabItem Header="quests" Background="SaddleBrown" Foreground="#FFFDD0">
-                <!-- Content for Tab 5 goes here -->
-                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentMember.quests }">
+            <!-- Quests -->
+            <TabItem Header="quests" Background="SaddleBrown" Foreground="#FFFDD0">                
+                <ListBox Margin="15" Background="SaddleBrown" Foreground="#FFFDD0" BorderBrush="SaddleBrown" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{ Binding CurrentProfile.raw.quests }">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
