@@ -37,20 +37,8 @@
                 </Grid.RowDefinitions>
 
                 <Label      Grid.Row="0" Grid.Column="0" Content="Enter username" Foreground="#826644" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="20" FontWeight="Bold"/>
-                <TextBox    Grid.Row="1" Grid.Column="0" Text="" Foreground="#FFFDD0" Margin="10, 2" Background="#826644" HorizontalContentAlignment="Center" VerticalAlignment="Top" Padding="3" FontSize="15" FontWeight="Bold"/>
-
-                <!-- button to start searching the user -->
-                <Button Content="Search" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border CornerRadius="10" Padding="5" Background="#826644" BorderBrush="#707070" BorderThickness="1">
-                                <ContentPresenter Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center" RecognizesAccessKey="True" />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                
-                </Grid>
+                <TextBox    Grid.Row="1" Grid.Column="0" x:Name="usernameSearch" Text="{Binding UsernameInput}" Foreground="#FFFDD0" Margin="10, 2" Background="#826644" HorizontalContentAlignment="Center" VerticalAlignment="Top" Padding="3" FontSize="15" FontWeight="Bold"/>
+            </Grid>
         </Border>
     </Grid>
 </Page>

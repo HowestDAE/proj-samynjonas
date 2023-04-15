@@ -8,16 +8,31 @@
         xmlns:vm="clr-namespace:HypixelSkyblock.ViewModel"
         mc:Ignorable="d"
         Title="Hypixel-Skyblock profile viewer" Height="450" Width="800">
+    
     <Window.DataContext>
-        <vm:MainViewModel>
+        <vm:MainViewModel/>
     </Window.DataContext>
 
-
     <Grid>
-        <Frame NavigationUIVisibility="Hidden" Content="{Binding currentPage}"/>
-        <Button VerticalAlignment="Bottom"
-                Command="{Binding }"
-                Content="{Binding }" />
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Frame Grid.RowSpan="3" NavigationUIVisibility="Hidden" Content="{ Binding CurrentPage }"/>
+
+        <Button x:Name="PageSwitchButton" Grid.Row="{Binding ButtonPosition}" Grid.Column="0" VerticalAlignment="{Binding ButtonAlligment}" HorizontalAlignment="Center" Foreground="Black" 
+                        Command="{ Binding SwitchPageCommand }"
+                        Content="{ Binding CommandText }" >
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="10" Padding="5" Background="#826644" BorderBrush="#707070" BorderThickness="1">
+                        <ContentPresenter Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center" RecognizesAccessKey="True" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
-    
+
 </Window>

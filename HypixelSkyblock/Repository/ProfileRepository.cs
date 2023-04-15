@@ -46,22 +46,6 @@ namespace HypixelSkyblock.Repository
 
         }
 
-        public static Profile GetProfile()
-        {
-            if(profile == null)
-            {
-                return profile;
-            }
-
-            using(var reader = new StreamReader("C:\\DAE\\Sem_4\\Tool_Dev\\github\\proj-samynjonas\\HypixelSkyblock\\Resources\\Data\\Profile_test.json"))
-            {
-                string json = reader.ReadToEnd();
-                profile = JsonConvert.DeserializeObject<Profile>(json);
-            }            
-
-            return profile;
-        }
-
         public static async Task<Profile> GetProfileAsync(string uuid) 
         {
             if (profile == null)
@@ -105,20 +89,6 @@ namespace HypixelSkyblock.Repository
             return profile;
         }
 
-        public static List<Profiles> GetProfiles()
-        {
-            List<Profiles> lstProfiles = new List<Profiles>();
-
-            GetProfile();
-
-            foreach (var profile in profile.Profiles)
-            {
-                lstProfiles.Add(profile.Value);
-            }
-
-            return lstProfiles;
-        }
-
         public static async Task<List<Profiles>> GetProfilesAsync(string username)
         {
             List<Profiles> lstProfiles = new List<Profiles>();
@@ -136,49 +106,11 @@ namespace HypixelSkyblock.Repository
             }
             return lstProfiles;
         }
-        //public static async Task<List<Member>> GetMembersAsync(string username)
-        //{
-        //    //TODO save this when converting from username to uuid
-        //    List<Member> lstMembers     = new List<Member>();
-        //    List<Profiles> lstProfiles  = await GetProfilesAsync(username);
-        //    
-        //    string UUID = mojangProfile.uuid;
-        //    if(!string.IsNullOrEmpty(UUID))
-        //    {
-        //        foreach (Profiles profile in lstProfiles)
-        //        {
-        //            if (profile.raw.ContainsKey(UUID))
-        //            {
-        //                lstMembers.Add(profile.r[UUID]);
-        //            }
-        //        }
-        //    }            
-        //
-        //    return lstMembers;
-        //}
         public static async Task<MojangProfile> GetMojangProfile(string username)
         {
             await GetUserAsync(username);
             return mojangProfile;
         }
 
-        //public static List<Member> GetMember()
-        //{
-        //    //TODO save this when converting from username to uuid
-        //    string UUID = mojangProfile.uuid;
-        //
-        //    List<Member> lstMembers = new List<Member>();
-        //    List<Profiles> lstProfiles = GetProfiles();
-        //
-        //    foreach(Profiles profile in lstProfiles) 
-        //    {
-        //        if(profile.Members.ContainsKey(UUID))
-        //        {
-        //            lstMembers.Add(profile.Members[UUID]);
-        //        }
-        //    }
-        //
-        //    return lstMembers;
-        //}
     }
 }

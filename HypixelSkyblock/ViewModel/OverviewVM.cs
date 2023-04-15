@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using HypixelSkyblock.Model;
 using HypixelSkyblock.Repository;
 using System;
@@ -6,21 +7,85 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static HypixelSkyblock.ViewModel.ProfilePageVM;
 
 namespace HypixelSkyblock.ViewModel
 {
     internal class OverviewVM : ObservableObject
     {
-        public Profile profile { get; private set; }
+        //Profile info
+        private Profiles currentProfile = new Profiles();
+        public Profiles CurrentProfile
+        {
+            get
+            {
+                return currentProfile;
+            }
+            set
+            {
+                currentProfile = value;
+                OnPropertyChanged(nameof(CurrentProfile));
+            }
+        }
 
-        public Profile selectedProfile { get; set; }
+        //Mojang profile
+        private MojangProfile mojangProfile = new MojangProfile()
+        {
+            name = "tempName",
+            uuid = "cb12d6095d2b4439a92bef959983c2a1"
+        };
+        public MojangProfile MojangProfile
+        {
+            get
+            {
+                return mojangProfile;
+            }
+            set
+            {
+                mojangProfile = value;
+                OnPropertyChanged(nameof(mojangProfile));
+            }
+        }
+
+        private List<Profiles> lstProfiles = new List<Profiles>();
+        public List<Profiles> LstProfiles
+        {
+            get
+            {
+                return lstProfiles;
+            }
+            set
+            {
+                lstProfiles = value;
+                OnPropertyChanged(nameof(lstProfiles));
+            }
+        }
+
+        public RelayCommand<string> SearchCommand
+        {
+            get; private set;
+        }
+
+        public async void LoadProfile(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username)) return;
+
+            MojangProfile   = await ProfileRepository.GetMojangProfile(username);
+            LstProfiles     = await ProfileRepository.GetProfilesAsync(username);
+
+            const int currentIndex = 0;
+            if (lstProfiles.Count > 0)
+            {
+                CurrentProfile = lstProfiles[currentIndex];
+            }
+        }
+
+        public string UsernameInput { get; set; }
+
 
         public OverviewVM()
         {
-            profile = ProfileRepository.GetProfile(); //Getting the user
-
-            //Console.WriteLine(profile.profiles.Count);
-            //Console.WriteLine(profile.profiles[0].Members.Count);
+            SearchCommand = new RelayCommand<string>(LoadProfile);
         }
 
 
