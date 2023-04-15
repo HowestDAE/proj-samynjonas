@@ -1,4 +1,4 @@
-# proj-samynjonas
+# Hypixel skyblock profile viewer
 proj-samynjonas created by GitHub Classroom
 
 This project uses the [https://sky.shiiyu.moe/api#tag/profile] api which is build on the [https://api.hypixel.net/#tag/API](official hypixel api).
