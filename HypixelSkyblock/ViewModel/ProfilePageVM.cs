@@ -99,11 +99,11 @@ namespace HypixelSkyblock.ViewModel
             return filteredStats;
         }
 
-        public async Task LoadProfile(string username)
+        public async Task LoadProfileAsync(string username)
         {
             if (string.IsNullOrWhiteSpace(username)) return;
 
-            MojangProfile   = await ProfileRepository.GetMojangProfile(username);
+            MojangProfile   = await ProfileRepository.GetMojangProfileAsync(username);
             LstProfiles     = await ProfileRepository.GetProfilesAsync(username);
 
             const int currentIndex = 0;
@@ -112,5 +112,18 @@ namespace HypixelSkyblock.ViewModel
                 CurrentProfile = lstProfiles[currentIndex];
             }
         }
+
+        public void LoadProfile()
+        {
+            MojangProfile = ProfileRepository.GetMojangProfile();
+            LstProfiles = ProfileRepository.GetProfiles();
+
+            const int currentIndex = 0;
+            if (lstProfiles.Count > 0)
+            {
+                CurrentProfile = lstProfiles[currentIndex];
+            }
+        }
+
     }
 }

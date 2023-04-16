@@ -144,7 +144,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\Data\Profile_test.json" />
+    <None Include="Resources\Data\MojangProfile_Local.json" />
+    <None Include="Resources\Data\Profile_Local.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

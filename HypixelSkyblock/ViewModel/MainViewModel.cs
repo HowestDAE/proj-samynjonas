@@ -42,6 +42,7 @@ namespace HypixelSkyblock.ViewModel
             }
         }
 
+        public bool IsLocal { get; set; }
 
         private int buttonPosition = 1;
         public int ButtonPosition
@@ -84,7 +85,14 @@ namespace HypixelSkyblock.ViewModel
                 string username = (mainPage.DataContext as OverviewVM).UsernameInput;
                 if (username == null) return;
 
-                await (profilePage.DataContext as ProfilePageVM).LoadProfile(username);
+                if(IsLocal)
+                {
+                    (profilePage.DataContext as ProfilePageVM).LoadProfile();
+                }
+                else
+                {
+                    await (profilePage.DataContext as ProfilePageVM).LoadProfileAsync(username);
+                }
 
                 CurrentPage = profilePage;
                 CommandText = "Go back";

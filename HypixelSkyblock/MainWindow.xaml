@@ -22,6 +22,8 @@
 
         <Frame Grid.RowSpan="3" NavigationUIVisibility="Hidden" Content="{ Binding CurrentPage }"/>
 
+        <CheckBox Content="Is Local" IsChecked="{ Binding IsLocal }" Grid.Row="0" HorizontalAlignment="Right" Margin="10"/>
+
         <Button x:Name="PageSwitchButton" Grid.Row="{Binding ButtonPosition}" Grid.Column="0" VerticalAlignment="{Binding ButtonAlligment}" HorizontalAlignment="Center" Foreground="Black" 
                         Command="{ Binding SwitchPageCommand }"
                         Content="{ Binding CommandText }" >

@@ -46,6 +46,17 @@ namespace HypixelSkyblock.Repository
 
         }
 
+        public static MojangProfile GetUser()
+        {
+            using(var reader = new StreamReader(@"../../Resources/Data/MojangProfile_Local.json"))
+            {
+                string json = reader.ReadToEnd();
+                mojangProfile = JsonConvert.DeserializeObject<MojangProfile>(json);
+            }
+
+            return mojangProfile;
+        }
+
         public static async Task<Profile> GetProfileAsync(string uuid) 
         {
             if (profile == null)
@@ -89,6 +100,22 @@ namespace HypixelSkyblock.Repository
             return profile;
         }
 
+        public static Profile GetProfile()
+        {
+            if (profile == null)
+            {
+                return profile;
+            }
+
+            using (var reader = new StreamReader(@"../../Resources/Data/Profile_Local.json"))
+            {
+                string json = reader.ReadToEnd();
+                profile = JsonConvert.DeserializeObject<Profile>(json);
+            }
+
+            return profile;
+        }
+
         public static async Task<List<Profiles>> GetProfilesAsync(string username)
         {
             List<Profiles> lstProfiles = new List<Profiles>();
@@ -106,9 +133,35 @@ namespace HypixelSkyblock.Repository
             }
             return lstProfiles;
         }
-        public static async Task<MojangProfile> GetMojangProfile(string username)
+
+
+        public static List<Profiles> GetProfiles()
+        {
+            List<Profiles> lstProfiles = new List<Profiles>();
+
+            GetUser();
+
+            GetProfile();
+
+            if (profile.Profiles.Values != null)
+            {
+                foreach (var profile in profile.Profiles)
+                {
+                    lstProfiles.Add(profile.Value);
+                }
+            }
+            return lstProfiles;
+        }
+
+        public static async Task<MojangProfile> GetMojangProfileAsync(string username)
         {
             await GetUserAsync(username);
+            return mojangProfile;
+        }
+
+        public static MojangProfile GetMojangProfile()
+        {
+            GetUser();
             return mojangProfile;
         }
 
