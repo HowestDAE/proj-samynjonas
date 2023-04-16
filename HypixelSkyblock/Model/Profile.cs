@@ -43,8 +43,6 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "dungeons")]
         public Dungeon dungeon { get; set; }
 
-        //TODO temp stats buffs
-
         [JsonProperty(PropertyName = "fishing_treasure_caught")]
         public int fishingTreasureCaught { get; set; }
 
@@ -66,10 +64,6 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "death_count")]
         public string deathCount { get; set; }
 
-        //TODO harp quest
-
-        //TODO experimentation
-
         [JsonProperty(PropertyName = "first_join_hub")]
         public int firstJoinHub { get; set; }
 
@@ -79,9 +73,6 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "fairy_souls_collected")]
         public int fairySoulsCollected { get; set; }
 
-        //[JsonProperty(PropertyName = "bestiary")]                         //TODO fix, there is 1 bool ):
-        //public Dictionary<string, int> bestiary { get; set; }
-
         [JsonProperty(PropertyName = "tutorial")]
         public List<string> tutorial { get; set; }
 
@@ -90,8 +81,6 @@ namespace HypixelSkyblock.Model
 
         [JsonProperty(PropertyName = "visited_zones")]
         public List<string> visitedZones { get; set; }
-
-        //TODO coop_invitation -- not enough info yet
 
         [JsonProperty(PropertyName = "soulflow")]
         public int soulflow { get; set; }
@@ -120,17 +109,11 @@ namespace HypixelSkyblock.Model
         [JsonProperty(PropertyName = "visited_modes")]
         public List<string> visitedModes { get; set; }
 
-        //TODO Disabled_potion_effects -- no info yet
-
         [JsonProperty(PropertyName = "trapper_quest")]
         public Dictionary<string, long> trapperQuest { get; set; }
 
         [JsonProperty(PropertyName = "mining_core")]
         public MiningCore miningCore { get; set; }
-
-        //TODO trophy_fish -- first is list other int
-
-        //TODO forge -- dont know how this works yet
 
         [JsonProperty(PropertyName = "fairy_souls")]
         public int fairySouls { get; set; }
@@ -146,8 +129,6 @@ namespace HypixelSkyblock.Model
 
         [JsonProperty(PropertyName = "favorite_arrow")]
         public string favoriteArrow { get; set; }
-
-        //TODO paused_effects
 
         [JsonProperty(PropertyName = "experience_skill_runecrafting")]
         public float experienceSkillRunecrafting { get; set; }
